@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+{% include 'header.html' %}
+<div>模板首页</div>
+<p>用户{{ user.name }}</p>
+<p>{{ content  }}</p>
+<p>爱好如下</p>
+<ul>
+    {% for item in hobbies %}
+    <li>{{ item }}</li>
+    {% endfor %}
+</ul>
+<ul>
+    {% for key,value in user.items %}
+    <li>{{ forloop.counter0 }}:{{ key }}: {{ value }}</li>
+    {% endfor %}
+</ul>
+<p>作者： {{ person.name }}</p>
+<p>年龄： {{ person.age }}</p>
+{% if person.age > 18 %}
+<p>年龄大于18岁</p>
+{% else %}
+<p>年龄小于18岁</p>
+{% endif %}
+{% with book0=books.0 %}
+    <span>书名：{{ book0.title }} </span><span>作者： {{ book0.author }}</span>
+    <a href="{% url 'book:book_detail_path' 123 %}">详情</a>
+    <a href="{% url 'book:book_detail_path' book_id=123 %}">详情</a>
+    <a href="{% url 'book:book_detail' %}?id=11">详情</a>
+{% endwith %}
+<h2>过滤器</h2>
+<p>{{ content | cut:' ' }}</p>
+<p>{{ person.birthday | date:'Y-m-d' }}</p>
+<p>{{ person.sex | default:'这是默认值' }}</p>
+</body>
+</html>

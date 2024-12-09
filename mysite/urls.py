@@ -16,9 +16,19 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, reverse
+from django.http import HttpResponse
+def index(request):
+    # 模块化路由时，进行reverse操作需要添加对应的命名空间
+    # 不同参数类型路径处理方式不同
+    print(reverse('book:book_detail') + f'?id={123}')
+    print(reverse('book:book_detail_path', kwargs={ "book_id": 321 }))
+    return HttpResponse("首页")
 
 urlpatterns = [
+    path("", index, name='home'),
+    path("book/", include("book.urls")),
     path("polls/", include("polls.urls")),
     path("admin/", admin.site.urls),
+    path("tem/", include("tem_demo.urls")),
 ]
