@@ -31,4 +31,5 @@ urlpatterns = [
     path("polls/", include("polls.urls")),
     path("admin/", admin.site.urls),
     path("tem/", include("tem_demo.urls")),
+    path("sql/", include("sql_app.urls")),
 ]
